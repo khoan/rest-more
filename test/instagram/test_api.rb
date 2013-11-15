@@ -13,7 +13,12 @@ describe RC::Instagram do
         {"meta":{"code":200}, "data":[{"username":"restmore", "bio":"", "website":"", "profile_picture":"http://images.ak.instagram.com/profiles/profile_123_75sq_1384489147.jpg", "full_name":"Khoa Nguyen", "id":"123"}]}
     JSON
 
-    RC::Instagram.new.user_search('restmore').should.eq({
+    # TODO
+    # would be better to accept client_id during initialization
+    # RC::Instagram.new(client_id: '123', client_secret: '123')
+    # but how?
+
+    RC::Instagram.new.user_search('restmore', client_id: '123').should.eq({
       "meta" => {
         "code" => 200},
       "data" => [{
