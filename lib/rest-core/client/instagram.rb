@@ -4,7 +4,13 @@ require 'rest-core'
 module RestCore
   Instagram = Builder.client do
     use DefaultSite, 'https://api.instagram.com/'
+    use DefaultHeaders, {'Accept' => 'application/json'}
+
     use JsonResponse, true
+    use CommonLogger, nil
+
+    use Oauth2Header
+    use Oauth2Query
   end
 end
 
@@ -22,7 +28,7 @@ module RestCore::Instagram::Client
   end
 
   def user_search username, options={}
-    get('v1/users/search', {q: username, client_id: options[:client_id]}, options)
+    get('v1/users/search', {q: username}, options)
   end
 end
 
