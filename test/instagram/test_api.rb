@@ -10,15 +10,10 @@ describe RC::Instagram do
   should 'retrieve user profile based on username' do
     stub_request(:get, %r{https://api.instagram.com/v1/users/search*}).
       to_return(body: <<-JSON)
-        {"meta":{"code":200}, "data":[{"username":"restmore", "bio":"", "website":"", "profile_picture":"http://images.ak.instagram.com/profiles/profile_123_75sq_1384489147.jpg", "full_name":"Khoa Nguyen", "id":"123"}]}
+        {"meta":{"code":200}, "data":[{"username":"restmore", "bio":"", "website":"", "profile_picture":"http://images.ak.instagram.com/profiles/profile_123_75sq_1384489147.jpg", "full_name":"Rest More", "id":"123"}]}
     JSON
 
-    # TODO
-    # would be better to accept client_id during initialization
-    # RC::Instagram.new(client_id: '123', client_secret: '123')
-    # but how?
-
-    RC::Instagram.new.user_search('restmore', client_id: '123').should.eq({
+    RC::Instagram.new.user_search('restmore').should.eq({
       "meta" => {
         "code" => 200},
       "data" => [{
@@ -26,7 +21,7 @@ describe RC::Instagram do
           "bio" => "",
           "website" => "",
           "profile_picture" => "http://images.ak.instagram.com/profiles/profile_123_75sq_1384489147.jpg",
-          "full_name" => "Khoa Nguyen",
+          "full_name" => "Rest More",
           "id" => "123"}] })
   end
 end
